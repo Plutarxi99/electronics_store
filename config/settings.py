@@ -10,12 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-ENV_TYPE = os.getenv('ENV_TYPE')
+
 load_dotenv(BASE_DIR / '.env')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -26,15 +27,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-if ENV_TYPE == 'local':
-    ALLOWED_HOSTS = []
-    DEBUG = True
-elif ENV_TYPE == 'server':
-    ALLOWED_HOSTS = [os.getenv('HOST_IP')]
-    DEBUG = True
-else:
-    ALLOWED_HOSTS = []
-    DEBUG = True
+ALLOWED_HOSTS = []
+DEBUG = True
 
 # Application definition
 
@@ -47,8 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # установленные пакеты
     'django_extensions',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'django_filters',
     # приложения в сервисе
     'users',
+    'retail',
 ]
 
 MIDDLEWARE = [
@@ -84,32 +82,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if ENV_TYPE == 'local':
-    DATABASES = {
-        'default': {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("POSTGRES_DB"),
-            "USER": os.getenv("POSTGRES_USER"),
-        }
+DATABASES = {
+    'default': {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
     }
-elif ENV_TYPE == 'server':
-    DATABASES = {
-        'default': {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("POSTGRES_DB"),
-            "USER": os.getenv("POSTGRES_USER"),
-            'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
-            'HOST': os.getenv("POSTGRES_HOST")
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("POSTGRES_DB"),
-            "USER": os.getenv("POSTGRES_USER"),
-        }
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -144,16 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-if ENV_TYPE == 'local':
-    STATICFILES_DIRS = (
-        BASE_DIR / 'static',
-    )
-elif ENV_TYPE == 'server':
-    STATIC_ROOT = BASE_DIR / 'static'
-else:
-    STATICFILES_DIRS = (
-        BASE_DIR / 'static',
-    )
+STATICFILES_DIRS = (
+    BASE_DIR / 'static',
+)
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -166,3 +138,15 @@ SUPERUSER_PASSWORD = os.getenv('SUPERUSER_PASSWORD')
 
 NULLABLE = {'blank': True, 'null': True}
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
