@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "57f0939e-fcd4-4e6e-a82d-185072ba52e6",
+		"name": "ecletronic_shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29836174"
+	},
+	"item": [
+		{
+			"name": "token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin@plut.arx\",\n    \"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/token/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4NDUyNDYwLCJpYXQiOjE3MDg0NDg4NjAsImp0aSI6ImVlOTQxMzBlMmQxMzQ2YmM5NjUxMDUxZjQyYTkxZTgzIiwidXNlcl9pZCI6MX0.TknH0PL22sJVJJ7E-Ubtxq70M9r9EuOZwZacNmQnBZc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/retail/?contact__country=Россия",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"retail",
+						""
+					],
+					"query": [
+						{
+							"key": "contact__country",
+							"value": "Россия"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4NTQ3MDc1LCJpYXQiOjE3MDg1NDM0NzUsImp0aSI6IjEwZmM5OTBmMDcyNDQ1ZmZiYjMyODI0MmEzNDE1ZTU5IiwidXNlcl9pZCI6MX0.VAhnxiogSDFe8vOYWRI1lFhk6CeKS0x-Zgv4fxAzE94",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test@test.ru\",\n    \"password\": \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users/create/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4NDUyNDYwLCJpYXQiOjE3MDg0NDg4NjAsImp0aSI6ImVlOTQxMzBlMmQxMzQ2YmM5NjUxMDUxZjQyYTkxZTgzIiwidXNlcl9pZCI6MX0.TknH0PL22sJVJJ7E-Ubtxq70M9r9EuOZwZacNmQnBZc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"product\": 2,\n        \"supplier\": 2,\n        \"name\": \"ГБЖ\",\n        \"level_union\": 1,\n        \"debt\": \"15050.00\",\n        \"created_at\": \"2024-02-16T10:49:28.013066Z\",\n        \"contact\": 2\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/retail/update/4/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"retail",
+						"update",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4MDg1NzgxLCJpYXQiOjE3MDgwODIxODEsImp0aSI6ImQwMzRhM2FmOTNjYzQ5ZWU4ZjUwZGIyNjI0MmZmYzU5IiwidXNlcl9pZCI6MX0.pGLO8V2jWajeyMgaTHWZDIQvncZtZbLXbwJgKKtUdMQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/retail/delete/1/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"retail",
+						"delete",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detail",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4MDg1NzgxLCJpYXQiOjE3MDgwODIxODEsImp0aSI6ImQwMzRhM2FmOTNjYzQ5ZWU4ZjUwZGIyNjI0MmZmYzU5IiwidXNlcl9pZCI6MX0.pGLO8V2jWajeyMgaTHWZDIQvncZtZbLXbwJgKKtUdMQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/retail/3/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"retail",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
