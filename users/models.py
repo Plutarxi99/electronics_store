@@ -62,24 +62,8 @@ class User(AbstractUser):
 
     objects = MyUserManager()
 
-    def has_one_of_groups(self, *groups: str) -> bool:
-        groups_filter = Q()
-        for group_name in groups:
-            groups_filter |= Q(name=group_name)
-        return self.groups.filter(groups_filter).exists()
-
     def __str__(self):
         return self.email
-
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
-        return True
-
-    def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
-        return True
 
     class Meta:
         verbose_name = 'пользователь'

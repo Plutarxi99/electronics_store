@@ -1,0 +1,157 @@
+[
+  {
+    "model": "retail.contact",
+    "pk": 1,
+    "fields": {
+      "email": "gok@gok.ru",
+      "country": "Россия",
+      "city": "Губкин",
+      "street": "кооперативная",
+      "number": 64
+    }
+  },
+  {
+    "model": "retail.contact",
+    "pk": 2,
+    "fields": {
+      "email": "GBJ@GBJ.ru",
+      "country": "Россия",
+      "city": "Белгород",
+      "street": "коопертивная",
+      "number": 67
+    }
+  },
+  {
+    "model": "retail.contact",
+    "pk": 3,
+    "fields": {
+      "email": "ip@ip.ru",
+      "country": "Россия",
+      "city": "Краснодар",
+      "street": "красная",
+      "number": 2
+    }
+  },
+  {
+    "model": "retail.contact",
+    "pk": 4,
+    "fields": {
+      "email": "qwe@qwe.ru",
+      "country": "Gjkmif",
+      "city": "qwerqw",
+      "street": "qwrqwer",
+      "number": 123
+    }
+  },
+  {
+    "model": "retail.product",
+    "pk": 1,
+    "fields": {
+      "name": "Железо",
+      "type": "1",
+      "release": "2024-02-16"
+    }
+  },
+  {
+    "model": "retail.product",
+    "pk": 2,
+    "fields": {
+      "name": "Брикеты",
+      "type": "2",
+      "release": "2024-02-16"
+    }
+  },
+  {
+    "model": "retail.product",
+    "pk": 3,
+    "fields": {
+      "name": "test",
+      "type": "test - 1",
+      "release": "2024-02-16"
+    }
+  },
+  {
+    "model": "retail.unionchain",
+    "pk": 2,
+    "fields": {
+      "name": "ИП",
+      "level_union": 2,
+      "level_in_retail": 1,
+      "contact": 1,
+      "product": 2,
+      "supplier": 12,
+      "debt": "15050.00",
+      "created_at": "2024-02-16T10:49:28.013Z"
+    }
+  },
+  {
+    "model": "retail.unionchain",
+    "pk": 4,
+    "fields": {
+      "name": "ГБЖ",
+      "level_union": 1,
+      "level_in_retail": 1,
+      "contact": 3,
+      "product": 2,
+      "supplier": 10,
+      "debt": "45245245.00",
+      "created_at": "2024-02-20T16:54:50.741Z"
+    }
+  },
+  {
+    "model": "retail.unionchain",
+    "pk": 10,
+    "fields": {
+      "name": "Завод ГОК",
+      "level_union": 0,
+      "level_in_retail": 0,
+      "contact": 2,
+      "product": 1,
+      "supplier": 10,
+      "debt": "53145.00",
+      "created_at": "2024-02-21T14:10:16.079Z"
+    }
+  },
+  {
+    "model": "retail.unionchain",
+    "pk": 11,
+    "fields": {
+      "name": "Завод Россия",
+      "level_union": 0,
+      "level_in_retail": 0,
+      "contact": 1,
+      "product": 1,
+      "supplier": 11,
+      "debt": "464646.00",
+      "created_at": "2024-02-21T14:15:08.605Z"
+    }
+  },
+  {
+    "model": "retail.unionchain",
+    "pk": 12,
+    "fields": {
+      "name": "Роз сеть",
+      "level_union": 1,
+      "level_in_retail": 1,
+      "contact": 1,
+      "product": 1,
+      "supplier": 10,
+      "debt": "0.00",
+      "created_at": "2024-02-21T15:19:16.520Z"
+    }
+  },
+  {
+    "model": "retail.unionchain",
+    "pk": 13,
+    "fields": {
+      "name": "Тест ИП",
+      "level_union": 2,
+      "level_in_retail": 1,
+      "contact": 4,
+      "product": 3,
+      "supplier": 4,
+      "debt": "213123213.00",
+      "created_at": "2024-02-21T17:49:52.182Z"
+    }
+  }
+]
