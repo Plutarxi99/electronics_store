@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from config import settings
@@ -40,8 +41,12 @@ class UnionChain(models.Model):
 
     name = models.CharField(max_length=120, verbose_name='Название звена сети')
     level_union = models.PositiveSmallIntegerField(choices=LevelUnion.choices, verbose_name='Уровень звена сети')
-    contact = models.ForeignKey(Contact, on_delete=models.PROTECT, verbose_name='Адрес звена сети')
-    product = models.ForeignKey(Product, on_delete=models.PROTECT, verbose_name='Продукт произведенный звеном сети')
+    level_in_retail = models.PositiveSmallIntegerField(verbose_name='Уровень звена по отношению к поставщику',
+                                                       **settings.NULLABLE)
+    contact = models.ForeignKey(Contact, on_delete=models.PROTECT, verbose_name='Адрес звена сети',
+                                related_name='contact')
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, verbose_name='Продукт произведенный звеном сети',
+                                related_name='product')
     supplier = models.ForeignKey('UnionChain', on_delete=models.SET_NULL, verbose_name='Поставщик от звена сети',
                                  **settings.NULLABLE)
     debt = models.DecimalField(default=0, max_digits=15, decimal_places=2,
@@ -49,7 +54,19 @@ class UnionChain(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания задолженности')
 
     def __str__(self):
-        return self.name
+        return f"{self.name}. Уровень: {self.level_union}"
+
+    def save(self, *args, **kwargs):
+        # для сохранения уровня в сети при отношении к поставщику
+        sup = self.supplier
+        lu = self.level_union
+        diff_lvl = 0
+        if sup is None or lu is None:
+            pass
+        elif sup and lu:
+            diff_lvl = lu - sup.level_union
+        self.level_in_retail = diff_lvl
+        super(UnionChain, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Звено сети'
